@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "c0708d75-f8c0-4bb2-8506-e4a09127baa0",
+		"name": "WeatherAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetWeather",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"London\");\r",
+							"});\r",
+							"\r",
+							"const schema={\r",
+							"    \"item\":\r",
+							"    {\r",
+							"        \"type\":\"object\",\r",
+							"        \"properties\":\r",
+							"        {\r",
+							"            \"coord\":{\"type\":\"object\"},\r",
+							"            \"properties\":\r",
+							"            {\r",
+							"                \"lon\":{\"type\":\"integer\"},\r",
+							"                \"lat\":{\"type\":\"integer\"}\r",
+							"            },\r",
+							"            \"weather\":{\"type\":\"object\"},\r",
+							"            \"properties\":\r",
+							"            {\r",
+							"                \"id\":{\"type\":\"integer\"},\r",
+							"                \"main\":{\"type\":\"string\"},\r",
+							"                \"description\":{\"type\":\"string\"},\r",
+							"                \"icon\":{\"type\":\"string\"}\r",
+							"            },\r",
+							"            \"base\":{\"type\":\"string\"},\r",
+							"            \"main\":{\"type\":\"object\"},\r",
+							"            \"properties\":\r",
+							"            {\r",
+							"                \"temp\":{\"type\":\"integer\"},\r",
+							"                \"feels_like\":{\"type\":\"integer\"},\r",
+							"                \"temp_min\":{\"type\":\"integer\"},\r",
+							"                \"temp_max\":{\"type\":\"integer\"},\r",
+							"                \"pressure\":{\"type\":\"integer\"},\r",
+							"                \"humidity\":{\"type\":\"integer\"}\r",
+							"            },\r",
+							"            \"visibility\":{\"type\":\"integer\"},\r",
+							"            \"wind\":{\"type\":\"object\"},\r",
+							"            \"properties\":\r",
+							"            {\r",
+							"               \"speed\":{\"type\":\"integer\"},\r",
+							"               \"deg\":{\"type\":\"integer\"},\r",
+							"\r",
+							"            },\r",
+							"            \"clouds\":{\"type\":\"object\"},\r",
+							"            \"properties\":\r",
+							"            {\r",
+							"                \"all\":{\"type\":\"integer\"}\r",
+							"            },\r",
+							"            \"dt\":{\"type\":\"integer\"},\r",
+							"            \"sys\":{\"type\":\"object\"},\r",
+							"            \"properties\":\r",
+							"            {\r",
+							"               \"type\":{\"type\":\"integer\"} ,\r",
+							"               \"id\":{\"type\":\"integer\"},\r",
+							"               \"country\":{\"type\":\"string\"},\r",
+							"               \"sunrise\":{\"type\":\"integer\"},\r",
+							"               \"sunset\":{\"type\":\"integer\"}\r",
+							"            },\r",
+							"            \"timezone\":{\"type\":\"integer\"},\r",
+							"            \"id\":{\"type\":\"integer\"},\r",
+							"            \"name\":{\"type\":\"string\"},\r",
+							"            \"cod\":{\"type\":\"integer\"}\r",
+							"\r",
+							"        }\r",
+							"\r",
+							"    }\r",
+							"};\r",
+							"pm.test(\"validate schema is present\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?q={{cityname}}&appid={{apikey}}",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{cityname}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
